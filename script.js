@@ -1,7 +1,14 @@
+// Declarations
+let saveBtn = document.querySelector(".saveBtn");
+let inputVal = document.querySelector(".description");
+let timeBlockHTML = document.querySelector("#myTimeBlocks") // my code
+let saveLocal = document.querySelector('#localStorageSave');
+
 // Todays Date.
 var today = moment();
 $("#currentDay").text(today.format("[Today's date is]:  MMMM Do YYYY, h:mm:ss a"));
 
+// All times Array
 var timeArray = [
     {
         hour: 9,
@@ -12,23 +19,37 @@ var timeArray = [
         display: "10AM"
     },
     {
+        hour: 11,
+        display: "11AM"
+    },
+    {
+        hour: 12,
+        display: "12PM"
+    },
+    {
+        hour: 13,
+        display: "1PM"
+    },
+    {
         hour: 14,
         display: "2PM"
     },
     {
-        hour: 3,
+        hour: 15,
         display: "3PM"
     },
     {
-        hour: 3,
-        display: "3PM"
+        hour: 16,
+        display: "4PM"
     },
     {
-        hour: 3,
-        display: "3PM"
+        hour: 17,
+        display: "5PM"
     }
 ]
 
+
+// timeBlocks function
 function showTimeBlocks(){
     var timeBlockHTML = '';
     var currentHour = today.hour()
@@ -53,7 +74,7 @@ function showTimeBlocks(){
             </div>
             <textarea id="text-${current.hour}" class="col-10 description ${timeClass}"></textarea>
             <button class="col-1 saveBtn">
-            <i class="fa-regular fa-floppy-disk"></i>
+            <i class="fa-solid fa-floppy-disk"></i>
             </button>
         </div>
         `
@@ -62,44 +83,29 @@ function showTimeBlocks(){
     $("#time-block-section").html(timeBlockHTML)
 }
 
+showTimeBlocks();
+
+
+// what happens when saveBtn is clicked
+$(saveBtn).click(function(event){
+    event.preventDefault();
+    localStorage.setItem('myInput', inputVal.value)
+    localStorage.getItem(inputVal)
+
+    saveLocal.innerText = "Appointmnet has been saved to the localStorage"
+
+});
+
+
+
+// saveBtn.addEventListener ("click",function(){
+//     // localStorage.setItem('value', "");
+//     console.log('Hello');
+
+// });
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const m = moment();
-// // var today = m
-// $("#currentDay").text(m.toString())
 
 
