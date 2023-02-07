@@ -95,7 +95,7 @@ $('.saveBtn').click((event) => {
     var getInput = $('.description').val();
     for (i = 0; i<getInput.length; i++){
         localStorage.setItem('myInput', (getInput) );
-        saveLocal.innerHTML = 'You have saved successfully';
+        saveLocal.innerText = 'You have saved successfully';
     }
     
 
