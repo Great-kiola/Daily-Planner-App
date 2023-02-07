@@ -5,7 +5,6 @@ let timeBlockHTML = document.querySelector("#myTimeBlocks") // my code
 let saveLocal = document.querySelector('#localStorageSave');
 
 
-
 // Todays Date.
 var today = moment();
 $("#currentDay").text(today.format("[Today's date is]:  MMMM Do YYYY, h:mm:ss a"));
@@ -89,37 +88,25 @@ showTimeBlocks();
 
 
 // what happens when saveBtn is clicked
-// $('.saveBtn').click((event) => {
-//     event.preventDefault();
-//     localStorage.setItem('myInput', inputVal.value)
-//     localStorage.getItem(inputVal);
-
-//     alert('You have saved this event');
-
-//     saveLocal.innerText = "Appointment has been saved to the localStorage"
-
-// });
-
 $('.saveBtn').click((event) => {
     event.preventDefault();
 
     // Saving input to the local storage
     var getInput = $('.description').val();
-    localStorage.setItem('myInput', getInput );
+    for (i = 0; i<getInput.length; i++){
+        localStorage.setItem('myInput', (getInput) );
+        saveLocal.innerHTML = 'You have saved successfully';
+    }
+    
 
     //Getting input to stay in the Text box.
+    const myTasks = localStorage.getItem('myInput');
     alert(localStorage.getItem('myInput'));
+    inputVal.innerHTML = myTasks;
+
 
 
 })
-
-
-
-// saveBtn.addEventListener ("click",function(){
-//     // localStorage.setItem('value', "");
-//     console.log('Hello');
-
-// });
 
 
 
