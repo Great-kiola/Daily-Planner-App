@@ -1,115 +1,101 @@
 // Declarations
 let saveBtn = document.querySelector(".saveBtn");
 let inputVal = document.querySelector(".description");
-let timeBlockHTML = document.querySelector("#myTimeBlocks") // my code
-let saveLocal = document.querySelector('#localStorageSave');
-
+let timeBlockHTML = document.querySelector("#myTimeBlocks"); // my code
+let saveLocal = document.querySelector("#localStorageSave");
 
 // Todays Date.
 var today = moment();
-$("#currentDay").text(today.format("[Today's date is]:  MMMM Do YYYY, h:mm:ss a"));
+$("#currentDay").text(
+  today.format("[Today's date is]:  MMMM Do YYYY, h:mm:ss a")
+);
 
 // All times Array
 var timeArray = [
-    {
-        hour: 9,
-        display: "9AM"
-    },
-    {
-        hour: 10,
-        display: "10AM"
-    },
-    {
-        hour: 11,
-        display: "11AM"
-    },
-    {
-        hour: 12,
-        display: "12PM"
-    },
-    {
-        hour: 13,
-        display: "1PM"
-    },
-    {
-        hour: 14,
-        display: "2PM"
-    },
-    {
-        hour: 15,
-        display: "3PM"
-    },
-    {
-        hour: 16,
-        display: "4PM"
-    },
-    {
-        hour: 17,
-        display: "5PM"
-    }
-]
-
+  {
+    hour: 9,
+    display: "9AM",
+  },
+  {
+    hour: 10,
+    display: "10AM",
+  },
+  {
+    hour: 11,
+    display: "11AM",
+  },
+  {
+    hour: 12,
+    display: "12PM",
+  },
+  {
+    hour: 13,
+    display: "1PM",
+  },
+  {
+    hour: 14,
+    display: "2PM",
+  },
+  {
+    hour: 15,
+    display: "3PM",
+  },
+  {
+    hour: 16,
+    display: "4PM",
+  },
+  {
+    hour: 17,
+    display: "5PM",
+  },
+];
 
 // timeBlocks function
-function showTimeBlocks(){
-    var timeBlockHTML = '';
-    var currentHour = today.hour()
+function showTimeBlocks() {
+  var timeBlockHTML = "";
+  var currentHour = today.hour();
 
-    for(var i = 0; i < timeArray.length; i++){
-        var current = timeArray[i];
+  for (var i = 0; i < timeArray.length; i++) {
+    var current = timeArray[i];
 
-        var timeClass =  "";
+    var timeClass = "";
 
-        if(current.hour === currentHour){
-            timeClass = "present"
-        }else if(current.hour < currentHour){
-            timeClass = "past"
-        }else if(current.hour > currentHour){
-            timeClass = "future"
-        }
-
-        timeBlockHTML += `
-         <div class="row time-block">
-            <div class="col-1 hour">
-                ${current.display}
-            </div>
-            <textarea id="text-${current.hour}" class="col-10 description ${timeClass}"></textarea>
-            <button class="col-1 saveBtn">
-            <i class="fa-solid fa-floppy-disk"></i>
-            </button>
-        </div>
-        `
+    if (current.hour === currentHour) {
+      timeClass = "present";
+    } else if (current.hour < currentHour) {
+      timeClass = "past";
+    } else if (current.hour > currentHour) {
+      timeClass = "future";
     }
 
-    $("#time-block-section").html(timeBlockHTML)    
+    timeBlockHTML += `
+    <div class="row time-block">
+      <div class="col-1 hour">
+        ${current.display}
+      </div>
+      <textarea id="text-${current.hour}" class="col-10 description ${timeClass}"></textarea>
+      <button class="col-1 saveBtn">
+        <i class="fa-solid fa-floppy-disk"></i>
+      </button>
+    </div>
+    `;
+  }
+
+  $("#time-block-section").html(timeBlockHTML);
 }
 
 showTimeBlocks();
 
-
 // what happens when saveBtn is clicked
-$('.saveBtn').click((event) => {
-    event.preventDefault();
+$(".saveBtn").click((event) => {
+  event.preventDefault();
 
-    // Saving input to the local storage
-    var getInput = $('.description').val();
-    for (i = 0; i<getInput.length; i++){
-        localStorage.setItem('myInput', (getInput) );
-        saveLocal.innerText = 'You have saved successfully';
-    }
-    
+  // Saving input to the local storage
+  var getInput = $(".description").val();
+  localStorage.setItem("myInput", JSON.stringify(getInput));
+  saveLocal.innerText = "You have saved successfully";
 
-    //Getting input to stay in the Text box.
-    const myTasks = localStorage.getItem('myInput');
-    alert(localStorage.getItem('myInput'));
-    inputVal.innerHTML = myTasks;
+  //Getting input to stay in the Text box.
+  console.log(localStorage.getItem("myInput"));
 
-
-
-})
-
-
-
-
-
-
+});
