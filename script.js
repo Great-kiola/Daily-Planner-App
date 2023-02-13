@@ -3,6 +3,8 @@ let saveBtn = document.querySelector(".saveBtn");
 let inputVal = document.querySelector(".description");
 let timeBlockHTML = document.querySelector("#myTimeBlocks"); // my code
 let saveLocal = document.querySelector("#localStorageSave");
+let clearBtn = document.querySelector('#ClearBtn')
+
 
 // Todays Date.
 var today = moment();
@@ -91,11 +93,34 @@ $(".saveBtn").click((event) => {
   event.preventDefault();
 
   // Saving input to the local storage
-  var getInput = $(".description").val();
+  var getInput = $('#text').val();
   localStorage.setItem("myInput", JSON.stringify(getInput));
   saveLocal.innerText = "You have saved successfully";
 
   //Getting input to stay in the Text box.
-  console.log(localStorage.getItem("myInput"));
+  const allTasks = JSON.parse(localStorage.getItem('myInput')) || [];
+  $('#text').innerHTML = allTasks
+  alert(localStorage.getItem("myInput"));
 
 });
+
+//What happens when clear task button is clicked
+$(clearBtn).on('click', ()=> {
+  
+  let myOption = prompt('Press Y/N to confirm')
+  let myAnswer = myOption.toLowerCase();
+
+  if (myAnswer === 'y'){
+    localStorage.clear();
+    alert('All task cleared');
+  } else if (myAnswer === 'n'){
+    alert('Tasks not cleared');
+  } else {
+    alert('Input a valid request');
+  }
+  
+})
+
+
+
+
