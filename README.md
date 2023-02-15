@@ -1,4 +1,4 @@
-# Daily-Planner-App
+# Daily-Planner
 
 # Project Title
 
