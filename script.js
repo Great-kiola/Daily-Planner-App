@@ -75,8 +75,8 @@ function showTimeBlocks() {
       <div class="col-1 hour">
         ${current.display}
       </div>
-      <textarea id="text-${current.hour}" class="col-10 description ${timeClass}"></textarea>
-      <button class="col-1 saveBtn">
+      <textarea id="text-${current.hour}" class="col-10 description ${timeClass}" ></textarea>
+      <button class="col-1 saveBtn" data-hour =${current.hour} >
         <i class="fa-solid fa-floppy-disk"></i>
       </button>
     </div>
@@ -84,6 +84,7 @@ function showTimeBlocks() {
   }
 
   $("#time-block-section").html(timeBlockHTML);
+  showSavedTasks();
 }
 
 showTimeBlocks();
@@ -93,17 +94,28 @@ showTimeBlocks();
 $(".saveBtn").click((event) => {
   event.preventDefault();
 
-  // Saving input to the local storage
-  var getInput = $('.description').val();
-  localStorage.setItem("myInput", JSON.stringify(getInput));
-  saveLocal.innerText = "You have saved successfully";
+  var hour = event.target.dataset.hour
+  
 
-  //Getting input to stay in the Text box.
-  const allTasks = JSON.parse(localStorage.getItem('myInput')) || [];
-  $('#text').innerHTML = allTasks
-  alert(localStorage.getItem("myInput"));
+  // Saving input to the local storage
+  var getInput = $(`#text-${hour}`).val();
+  localStorage.setItem(`task-${hour}`, getInput);
+  saveLocal.innerText = "You have saved successfully ✅";
+  setTimeout(clearSavedMessage, 1100)
 
 });
+
+function clearSavedMessage(){
+  saveLocal.innerText = ""
+}
+
+function showSavedTasks(){
+  for (var i = 0; i < timeArray.length; i++) {
+    let current = timeArray[i];
+    let saved = localStorage.getItem(`task-${current.hour}`) || "";
+    $(`#text-${current.hour}`).val(saved)
+  }
+}
 
 
 //What happens when clear task button is clicked
@@ -114,6 +126,7 @@ $(clearBtn).on('click', ()=> {
 
   if (myAnswer === 'y'){
     localStorage.clear();
+    showSavedTasks();
     alert('All task cleared');
   } else if (myAnswer === 'n'){
     alert('Tasks not cleared');
