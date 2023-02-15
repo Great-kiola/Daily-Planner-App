@@ -90,7 +90,6 @@ function showTimeBlocks() {
 showTimeBlocks();
 
 // what happens when saveBtn is clicked
-
 $(".saveBtn").click((event) => {
   event.preventDefault();
 
@@ -127,7 +126,6 @@ $(clearBtn).on('click', ()=> {
   if (myAnswer === 'y'){
     localStorage.clear();
     showSavedTasks();
-    alert('All task cleared');
   } else if (myAnswer === 'n'){
     alert('Tasks not cleared');
   } else {
