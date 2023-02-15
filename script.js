@@ -89,11 +89,12 @@ function showTimeBlocks() {
 showTimeBlocks();
 
 // what happens when saveBtn is clicked
+
 $(".saveBtn").click((event) => {
   event.preventDefault();
 
   // Saving input to the local storage
-  var getInput = $('#text').val();
+  var getInput = $('.description').val();
   localStorage.setItem("myInput", JSON.stringify(getInput));
   saveLocal.innerText = "You have saved successfully";
 
@@ -103,6 +104,7 @@ $(".saveBtn").click((event) => {
   alert(localStorage.getItem("myInput"));
 
 });
+
 
 //What happens when clear task button is clicked
 $(clearBtn).on('click', ()=> {
@@ -120,7 +122,5 @@ $(clearBtn).on('click', ()=> {
   }
   
 })
-
-
 
 
