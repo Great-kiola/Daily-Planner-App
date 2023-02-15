@@ -1,7 +1,4 @@
 # Daily-Planner
-
-# Project Title
-
 Week 7 assignment, project (Daily-planer-app).
 
 
